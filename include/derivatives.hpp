@@ -1,13 +1,8 @@
-#ifndef DERIVATIVES_H 
-#define DERIVATIVES_H
+#ifndef DERIVATIVES_HPP
+#define DERIVATIVES_HPP
+#include <iostream>
+#include <string>
 
-class Random {
-    int x;
-public:
-    Random(int c);
-    virtual ~Random();
-    int get() const;
-    void set(int c);
-};
+
 
 #endif
