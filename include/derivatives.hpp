@@ -3,6 +3,11 @@
 #include <iostream>
 #include <string>
 
+class DerivativeSolver {
+    
+public:
+
+}
 
 
 #endif
