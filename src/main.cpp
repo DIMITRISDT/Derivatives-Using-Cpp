@@ -8,6 +8,6 @@ int main() {
     string function;
     cout << "Type your function {f(x)}: ";
     getline(cin, function);
-    cout << p1.term_counter(function) << endl;
+    p1.term_saving(function);
     return 0;
 }

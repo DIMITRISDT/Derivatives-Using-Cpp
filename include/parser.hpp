@@ -6,13 +6,16 @@
 class Parser
 {
 private:
-    unsigned int* term_positions;
-
+    unsigned int total_terms;
+    std::string* terms; //this pointer is used to keep the terms of the (f(x)) (Dynamic Allocation)
 public:
-    int term_counter(std::string& function);
-    std::string* parser_controller(std::string& function, int value_of_x);
+    Parser(); //definition of total_terms
+    void term_counter(std::string& function); //this function counts the total terms of an (f(x)) //maybe needs fixing
+    void term_saving(std::string& function); 
+    std::string* parser_controller(std::string& function);
+    ~Parser(); //deallocation
 };
 
-bool comes_x(const char portion_of_function); //this functinon check is the variable x comes after an element
+bool after_x(const std::string& rest_function);
 
 #endif
