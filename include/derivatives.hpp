@@ -16,12 +16,12 @@ public:
     std::string numberPower(char base, int power);
 
     std::string eBasePower(std::string power);
-    std::string eBasePower(std::string power, std::string multi) // continue from here
+    std::string eBasePower(std::string power, std::string multi); // continue from here
 
     std::string exponential(std::string input);
     std::string naturalLog(std::string input);
     std::string logarithm(std::string input);
-}
+};
 
 
 #endif
