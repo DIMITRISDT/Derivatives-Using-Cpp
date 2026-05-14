@@ -16,6 +16,7 @@ public:
     ~Parser(); //deallocation
 };
 
+
 bool after_x(const std::string& rest_function);
 
 #endif

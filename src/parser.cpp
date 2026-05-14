@@ -8,9 +8,10 @@ Parser::Parser() { this->total_terms = 0; }
 
 void Parser::term_counter(std::string& function)
 {
-    unsigned int size = function.size(), parenthesis_cnt = 0;
+    // unsigned int size = function.size();
+    unsigned int parenthesis_cnt = 0;
     const char* ptr = &function[0];
-    for( ; ptr != '\0'; ptr++)
+    for( ; *ptr != '\0'; ptr++)
     {
         if(*ptr == '(')
             parenthesis_cnt++;
@@ -30,10 +31,10 @@ void Parser::term_counter(std::string& function)
 void Parser::term_saving(std::string& function)
 {
     term_counter(function); //calc of amount of terms
-    std::cout << total_terms << std::endl; //test
+    // std::cout << total_terms << std::endl;  //number of terms
     std::string *terms = new std::string[total_terms]; //allocating space (string) for each term 
     const char* ptr = &function[0];
-    const char* ptr_temp = ptr;
+    const char* term_start = &function[0];
     unsigned int index = -1, term_length = 0, parenthesis_cnt = 0;
     for(; *ptr!='\0'; ptr++)
     {
@@ -45,42 +46,43 @@ void Parser::term_saving(std::string& function)
         if(!parenthesis_cnt && (*ptr == '+' || *ptr == '-'))
         {
             index++;
-            size_t start_of_term = (unsigned)(ptr - function[0]);
-            terms[index] = function.substr(start_of_term, term_length-1);
-            term_length = 0;
+            size_t start_of_term = term_start - &function[0]; //(differnce) between a pointer of term's start and the string start
+            terms[index] = function.substr(start_of_term, term_length-1); //(term_length -1) without the operator
+            term_start = ptr + 1; //start of the next term
+            term_length = 0; //reload of the counter
         }
     }
-    for(int i=0; i<total_terms; i++)
+    for(unsigned int i=0; i<total_terms; i++) //test
         std::cout << this->terms[i] << std::endl;
 }
 
-std::string* Parser::parser_controller(std::string& function)
-{
-    //extra
-    // if(*ptr>= '0' && *ptr<= '9')
-    // {
-    //     continue;
-    // }
-    // else if(*ptr == 'x')
-    // {
-    //     int start = (ptr+1) - &function[0]; //calc of start
-    //     int end = size; //calc of end
-    //     if(after_x(function.substr(start,end))) //passing the rest string after (x)
-    //     {
-    //         cout << "the term has finished\n";
-    //         if(isdigit(*(ptr-1))) 
-    //         {
-    //             cout << "certain function will be called\n";
-    //         }
-    //     }
-    // }
-}
+// std::string* Parser::parser_controller(std::string& function)
+// {
+//     // extra
+//     // if(*ptr>= '0' && *ptr<= '9')
+//     // {
+//     //     continue;
+//     // }
+//     // else if(*ptr == 'x')
+//     // {
+//     //     int start = (ptr+1) - &function[0]; //calc of start
+//     //     int end = size; //calc of end
+//     //     if(after_x(function.substr(start,end))) //passing the rest string after (x)
+//     //     {
+//     //         cout << "the term has finished\n";
+//     //         if(isdigit(*(ptr-1))) 
+//     //         {
+//     //             cout << "certain function will be called\n";
+//     //         }
+//     //     }
+//     // }
+// }
 
 Parser::~Parser() { delete[] this->terms; }
 
 bool after_x(const std::string& rest_function)
 {
-    unsigned int size = rest_function.size();
+    // unsigned int size = rest_function.size();
     const char* ptr = &rest_function[0];
     for(; *ptr!='\0'; ptr++)
         if(*ptr == '+' || *ptr == '-') //this means the term has finished
